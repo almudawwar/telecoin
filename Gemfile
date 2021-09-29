@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
+gem 'dotenv', '~> 2.7'
 gem 'json', '~> 2.5', '>= 2.5.1'
 gem 'net-http-persistent', '~> 4.0', '>= 4.0.1'
 gem 'rubocop', '~> 1.21'
