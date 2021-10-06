@@ -9,3 +9,7 @@ gem 'json', '~> 2.5', '>= 2.5.1'
 gem 'net-http-persistent', '~> 4.0', '>= 4.0.1'
 gem 'rubocop', '~> 1.21'
 gem 'telegram-bot-ruby', '~> 0.16.0'
+
+group :development do
+  gem 'pry-byebug', '~> 3.9'
+end
