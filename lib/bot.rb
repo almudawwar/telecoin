@@ -13,10 +13,10 @@ class Bot
 
     Telegram::Bot::Client.run(token) do |bot|
       bot.listen do |message|
-        case message.text
+        case message.text.downcase
         when '/start'
           bot.api.send_message(chat_id: message.chat.id, text: 'Welcome to an Altered Future...')
-        when 'Nonagon Infinity'
+        when 'nonagon infinity'
           bot.api.send_photo(chat_id: message.chat.id, photo: Faraday::UploadIO.new('img/nonagon_stu.jpg', 'image/jpeg'))
         else
           bot.api.send_message(chat_id: message.chat.id, text: "I'm a 5 star bot, #{message.from.first_name}!")
