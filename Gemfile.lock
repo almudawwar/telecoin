@@ -37,6 +37,7 @@ GEM
     ice_nine (0.11.2)
     json (2.5.1)
     method_source (1.0.0)
+    minitest (5.14.4)
     multipart-post (2.1.1)
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
@@ -82,6 +83,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv (~> 2.7)
   json (~> 2.5, >= 2.5.1)
+  minitest (~> 5.14, >= 5.14.4)
   net-http-persistent (~> 4.0, >= 4.0.1)
   pry-byebug (~> 3.9)
   rubocop (~> 1.21)
