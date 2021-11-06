@@ -5,6 +5,7 @@ require 'dotenv'
 
 class CoinbaseClient
   DEFAULT_CURRENCY = 'EUR'
+  COMMON_CRYPTOS = %w[btc eth dot sol icp ltc].freeze
 
   def initialize(currency: DEFAULT_CURRENCY)
     @currency = currency
