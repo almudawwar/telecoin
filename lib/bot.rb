@@ -9,10 +9,9 @@ class Bot
   USERNAME = 'TelecoinCryptoBot'
 
   def initialize
-    puts "Heyyuup - #{Process.pid}"
     token = Dotenv.load['TELEGRAM_TOKEN']
 
-    Telegram::Bot::Client.run(token) do |bot|
+    Telegram::Bot::Client.run(token, logger: Logger.new($stdout)) do |bot|
       bot.listen do |message|
         case message.text.downcase
         when '/start'
@@ -38,7 +37,7 @@ class Bot
 
   def crypto_currencies_keyboard
     Telegram::Bot::Types::ReplyKeyboardMarkup
-      .new(keyboard: CoinbaseClient::COMMON_CRYPTOS, one_time_keyboard: true)
+      .new(keyboard: CoinbaseClient::COMMON_CRYPTOS.map(&:upcase), one_time_keyboard: true)
   end
 
   def current_price(crypto)
