@@ -7,6 +7,8 @@ class CoinbaseClient
   DEFAULT_CURRENCY = 'EUR'
   COMMON_CRYPTOS = %w[btc eth dot sol icp ltc].freeze
 
+  attr_accessor :currency
+
   def initialize(currency: DEFAULT_CURRENCY)
     @currency = currency
     @client = Coinbase::Wallet::Client.new(api_key: Dotenv.load['COINBASE_KEY'],

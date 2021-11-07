@@ -42,6 +42,9 @@ class Bot
   end
 
   def current_price(crypto)
-    coinbase.current_price(crypto: crypto).to_s
+    price = coinbase.current_price(crypto: crypto)
+    return "There was an error trying to fetch #{crypto}-#{coinbase.currency}" if price['error']
+
+    "Crypto: #{price['base']} \nValue: #{price['amount'].to_f} #{coinbase.currency}"
   end
 end
