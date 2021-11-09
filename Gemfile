@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 gem 'coinbase', '~> 4.2', '>= 4.2.2'
+gem 'concurrent-ruby', '~> 1.1', '>= 1.1.9'
 gem 'dotenv', '~> 2.7'
 gem 'json', '~> 2.5', '>= 2.5.1'
 gem 'minitest', '~> 5.14', '>= 5.14.4'
