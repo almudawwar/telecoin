@@ -5,7 +5,7 @@ require 'dotenv'
 
 class CoinbaseClient
   DEFAULT_CURRENCY = 'EUR'
-  COMMON_CRYPTOS = %w[btc eth dot sol icp ltc].freeze
+  COMMON_CRYPTOS = %w[btc eth dot sol icp ltc eos].freeze
 
   attr_accessor :currency
 
@@ -21,7 +21,7 @@ class CoinbaseClient
     price = fetch_price(crypto)
     return { error: :invalid_currency } if price.nil?
 
-    price
+    price.transform_keys(&:to_sym)
   end
 
   private
