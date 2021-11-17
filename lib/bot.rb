@@ -3,6 +3,7 @@
 require 'dotenv'
 require 'telegram/bot'
 require 'pry-byebug'
+require 'concurrent'
 require_relative 'coinbase_client'
 
 class Bot
@@ -12,6 +13,7 @@ class Bot
     token = Dotenv.load['TELEGRAM_TOKEN']
 
     Telegram::Bot::Client.run(token, logger: Logger.new($stdout)) do |bot|
+      @bot = bot
       bot.listen do |message|
         case message.text.downcase
         when '/start'
@@ -20,6 +22,17 @@ class Bot
           bot.api.send_photo(chat_id: message.chat.id, photo: Faraday::UploadIO.new('img/nonagon_stu.jpg', 'image/jpeg'))
         when 'crypto'
           bot.api.send_message(chat_id: message.chat.id, text: 'Which one?', reply_markup: crypto_currencies_keyboard)
+        when 'check eos'
+          timer_task = Concurrent::TimerTask.new(execution_interval: 600) do |task|
+            price = coinbase.current_price(crypto: 'EOS')
+            bot.logger.info("EOS Price Check:\t #{price[:amount]}")
+
+            if price[:amount].to_f >= 4.33
+              @bot.api.send_message(chat_id: message.chat.id, text: "Price of EOS is now #{price[:amount]}!")
+              task.shutdown
+            end
+          end
+          timer_task.execute
         when *CoinbaseClient::COMMON_CRYPTOS
           bot.api.send_message(chat_id: message.chat.id, text: current_price(message))
         else
