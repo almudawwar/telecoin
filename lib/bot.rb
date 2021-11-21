@@ -50,8 +50,8 @@ class Bot
   end
 
   def crypto_currencies_keyboard
-    Telegram::Bot::Types::ReplyKeyboardMarkup
-      .new(keyboard: CoinbaseClient::COMMON_CRYPTOS.map(&:upcase), one_time_keyboard: true)
+    grouped_cryptos = CoinbaseClient::COMMON_CRYPTOS.map(&:upcase).each_slice(4)
+    Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: grouped_cryptos, one_time_keyboard: true)
   end
 
   def current_price(crypto)

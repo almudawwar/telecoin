@@ -5,7 +5,7 @@ require 'dotenv'
 
 class CoinbaseClient
   DEFAULT_CURRENCY = 'EUR'
-  COMMON_CRYPTOS = %w[btc eth dot sol icp ltc eos].freeze
+  COMMON_CRYPTOS = %w[btc eth dot sol icp ltc eos cgld].freeze
 
   attr_accessor :currency
 
